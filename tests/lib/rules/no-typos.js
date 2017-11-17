@@ -174,7 +174,7 @@ ruleTester.run('no-typos', rule, {
       const contextTypes = "CONTEXTTYPES"
       const childContextTypes = "CHILDCONTEXTTYPES"
       const defautProps = "DEFAULTPROPS"
-      
+
       class First extends React.Component {}
       First[propTypes] = {};
       First[contextTypes] = {};
@@ -260,81 +260,134 @@ ruleTester.run('no-typos', rule, {
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.number.isRequired
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.number.isRequired
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-     Component.propTypes = {
-       e: PropTypes.shape({
-         ea: PropTypes.string,
-       })
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.propTypes = {
+        e: PropTypes.shape({
+          ea: PropTypes.string,
+        })
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string,
-       b: PropTypes.string.isRequired,
-       c: PropTypes.shape({
-         d: PropTypes.string,
-         e: PropTypes.number.isRequired,
-       }).isRequired
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.string,
+        b: PropTypes.string.isRequired,
+        c: PropTypes.shape({
+          d: PropTypes.string,
+          e: PropTypes.number.isRequired,
+        }).isRequired
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-    Component.propTypes = {
-       a: PropTypes.oneOfType([
-         PropTypes.string,
-         PropTypes.number
-       ])
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ])
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-    Component.propTypes = {
-       a: PropTypes.oneOf([
-         'hello',
-         'hi'
-       ])
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.oneOf([
+          'hello',
+          'hi'
+        ])
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-     Component.childContextTypes = {
-       a: PropTypes.string,
-       b: PropTypes.string.isRequired,
-       c: PropTypes.shape({
-         d: PropTypes.string,
-         e: PropTypes.number.isRequired,
-       }).isRequired
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.childContextTypes = {
+        a: PropTypes.string,
+        b: PropTypes.string.isRequired,
+        c: PropTypes.shape({
+          d: PropTypes.string,
+          e: PropTypes.number.isRequired,
+        }).isRequired
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
-    code: `class Component extends React.Component {};
-     Component.contextTypes = {
-       a: PropTypes.string,
-       b: PropTypes.string.isRequired,
-       c: PropTypes.shape({
-         d: PropTypes.string,
-         e: PropTypes.number.isRequired,
-       }).isRequired
-     }
+    code: `
+      import PropTypes from "prop-types";
+      class Component extends React.Component {};
+      Component.contextTypes = {
+        a: PropTypes.string,
+        b: PropTypes.string.isRequired,
+        c: PropTypes.shape({
+          d: PropTypes.string,
+          e: PropTypes.number.isRequired,
+        }).isRequired
+      }
+   `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
+    code: `
+      import PropTypes from 'prop-types'
+      import * as MyPropTypes from 'lib/my-prop-types'
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.string,
+        b: MyPropTypes.MYSTRING,
+        c: MyPropTypes.MYSTRING.isRequired,
+      }
+   `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
+    code: `
+      const PropTypes = require('prop-types');
+      const MyPropTypes = require('lib/my-prop-types')
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: PropTypes.string,
+        b: MyPropTypes.MYSTRING,
+        c: MyPropTypes.MYSTRING.isRequired,
+      }
+   `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
+    code: `
+      const RealPropTypes = require('prop-types');
+      const MyPropTypes = require('lib/my-prop-types')
+      class Component extends React.Component {};
+      Component.propTypes = {
+        a: RealPropTypes.string,
+        b: MyPropTypes.MYSTRING,
+        c: MyPropTypes.MYSTRING.isRequired,
+      }
    `,
     parser: 'babel-eslint',
     parserOptions: parserOptions
@@ -666,6 +719,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
           a: PropTypes.Number.isRequired
@@ -678,6 +732,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
           a: PropTypes.number.isrequired
@@ -690,6 +745,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
           a: PropTypes.Number
@@ -702,6 +758,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
         a: PropTypes.shape({
@@ -717,6 +774,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
         a: PropTypes.oneOfType([
@@ -732,6 +790,7 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.propTypes = {
         a: PropTypes.bools,
@@ -753,12 +812,57 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
+      import PropTypes from "prop-types";
       class Component extends React.Component {};
       Component.childContextTypes = {
         a: PropTypes.bools,
         b: PropTypes.Array,
         c: PropTypes.function,
         d: PropTypes.objectof,
+      }
+    `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions,
+    errors: [{
+      message: 'Typo in declared prop type: bools'
+    }, {
+      message: 'Typo in declared prop type: Array'
+    }, {
+      message: 'Typo in declared prop type: function'
+    }, {
+      message: 'Typo in declared prop type: objectof'
+    }]
+  }, {
+    code: `
+      const PropTypes = require('prop-types');
+      class Component extends React.Component {};
+      Component.childContextTypes = {
+        a: PropTypes.bools,
+        b: PropTypes.Array,
+        c: PropTypes.function,
+        d: PropTypes.objectof,
+      }
+    `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions,
+    errors: [{
+      message: 'Typo in declared prop type: bools'
+    }, {
+      message: 'Typo in declared prop type: Array'
+    }, {
+      message: 'Typo in declared prop type: function'
+    }, {
+      message: 'Typo in declared prop type: objectof'
+    }]
+  }, {
+    code: `
+      const RealPropTypes = require('prop-types');
+      class Component extends React.Component {};
+      Component.childContextTypes = {
+        a: RealPropTypes.bools,
+        b: RealPropTypes.Array,
+        c: RealPropTypes.function,
+        d: RealPropTypes.objectof,
       }
     `,
     parser: 'babel-eslint',
