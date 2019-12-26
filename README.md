@@ -1,6 +1,8 @@
 ESLint-plugin-React
 ===================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dyna-dot/eslint-plugin-reac.svg)](https://greenkeeper.io/)
+
 [![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Build Status][appveyor-image]][appveyor-url] [![Dependency Status][deps-image]][deps-url] [![Coverage Status][coverage-image]][coverage-url] [![Code Climate][climate-image]][climate-url]
 
 React specific linting rules for ESLint
